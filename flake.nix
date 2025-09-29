@@ -80,9 +80,7 @@
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
-      # Enable alternative shell support in nix-darwin.
       programs.bash.enable = true;
-      
       security.pam.services.sudo_local.touchIdAuth = true;
 
       # Set Git commit hash for darwin-version.
@@ -105,8 +103,6 @@
     };
   in
   {
-    # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#mbp16
     darwinConfigurations."mbp16" = nix-darwin.lib.darwinSystem {
       modules = [ configuration ];
     };
