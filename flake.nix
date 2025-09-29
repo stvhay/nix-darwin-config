@@ -88,7 +88,35 @@
       homebrew = {
         enable = true;
         casks = [
+          "1password"
+          "1password-cli"
+          "alt-tab"
+          "balenaetcher"
+          "busycontacts"
+          "caffeine"
+          "daisydisk"
+          "discord"
+          "firefox@esr"
+          "firefox@developer-edition"
+          "element"
+          "ghostty"
+          "gimp"
+          "handbrake-app"
+          "jellyfin-media-player"
+          "knockknock"
+          "logseq"
+          "lulu"
+          "maintenance"
+          "movist-pro"
+          "rectangle"
+          "signal"
+          "slack"
+          "splice"
+          "steam"
+          "vlc"
           "vscodium"
+          "zed"
+          "zoom"
         ];
       };
 
