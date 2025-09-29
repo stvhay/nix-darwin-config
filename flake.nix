@@ -77,7 +77,7 @@
           zlib       
         ];
 
-      # Necessary for using flakes on this system.
+      # Necessary for recommended use of flakes for managing nix-darwin
       nix.settings.experimental-features = "nix-command flakes";
 
       programs.bash.enable = true;
