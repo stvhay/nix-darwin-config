@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+file="/etc/nix-darwin/flake.nix"
+
+if [ ! -f "$file" ]
+then
+  echo "$file does not exist."
+  exit 1
+fi
+
+before=$(sha1sum "$file")
+sudo nvim "$file"
+after=$(sha1sum "$file")
+
+if [ "$after" != "$before" ]
+then
+  (
+    cd /etc/nix-darwin/ && \
+      nix flake update && \
+      sudo darwin-rebuild switch --flake .
+  )
+else
+  echo "No changes made to $file"
+  exit 1
+fi
+

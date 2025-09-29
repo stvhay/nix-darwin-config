@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+(
+  cd /etc/nix-darwin/ && \
+    nix flake update && \
+    sudo darwin-rebuild switch --flake .
+)
+
