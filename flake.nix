@@ -69,6 +69,7 @@
           uv
           vim
           watch
+          wezterm
           wget
           wireguard-tools
           xld
