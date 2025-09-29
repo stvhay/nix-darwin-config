@@ -86,6 +86,9 @@
       ];
   
       fonts.packages = with pkgs; [
+        fira-code
+        fira-code-symbols
+        mplus-outline-fonts.githubRelease
         noto-fonts
         noto-fonts-emoji
       ];
