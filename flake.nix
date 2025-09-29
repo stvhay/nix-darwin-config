@@ -34,6 +34,7 @@
           graphviz
           iftop
           imagemagick
+          intermodal
           inetutils
           jq
           gnumake
