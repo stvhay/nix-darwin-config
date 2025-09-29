@@ -67,6 +67,7 @@
           ripgrep
           rsync
           ruff
+          screen
           shellcheck
           smartmontools
           socat
