@@ -1,26 +1,35 @@
 #!/usr/bin/env bash
 
-file="/etc/nix-darwin/flake.nix"
+dir="/etc/nix-darwin"
+file="$dir/flake.nix"
 
-if [ ! -f "$file" ]
-then
-  echo "$file does not exist."
-  exit 1
-fi
+run-update() 
+(
+  cd "$dir"
+  if git diff --quiet -- flake.nix
+  then
+    echo "No changes to $file."
+    return 0
+  fi
 
-before=$(sha1sum "$file")
+  printf "\n%s" "Updating Nix...\n"
+  if sudo nix flake update && sudo darwin-rebuild switch --flake .
+  then
+    printf "\n%s" "Committing to git.\n"
+    git add flake.nix
+    git commit -m "Update on $(date)."
+    git push -u origin main
+  else
+    return 1
+  fi
+)
+
+command -v git > /dev/null || { echo "Error: git not installed."; exit 1; }
+[ -d "$dir/.git" ] || { echo "Error: git repository not initialized in $dir"; exit 1; }
+[ -f "$file" ] || { echo "Error: $file does not exist."; exit 1; }
+
+echo "Opening editor..."
 sudo nvim "$file"
-after=$(sha1sum "$file")
 
-if [ "$after" != "$before" ]
-then
-  (
-    cd /etc/nix-darwin/ && \
-      nix flake update && \
-      sudo darwin-rebuild switch --flake .
-  )
-else
-  echo "No changes made to $file"
-  exit 1
-fi
+run-update
 
