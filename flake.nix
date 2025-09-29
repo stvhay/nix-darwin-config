@@ -133,6 +133,7 @@
         dock.autohide = true;
         finder.AppleShowAllExtensions = true;
         finder.FXPreferredViewStyle = "clmv";
+        SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
       };
       
       system.primaryUser = "hays";
