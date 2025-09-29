@@ -16,7 +16,7 @@ pre-update()
   then
     printf "\n%s\n" "Pulling updates before editing..."
     git pull || error "Cannot pull update from git repository..."
-    sudo nix flake update || error "Flake update failed."
+    sudo nix flake update --no-warn-dirty || error "Flake update failed."
     sudo darwin-rebuild switch --flake . || error "Update pulled from git failed to build."
   fi
 )
@@ -31,7 +31,7 @@ run-update()
   fi
 
   printf "\n%s\n" "Updating Nix..."
-  sudo nix flake update || error "Flake update failed after edit."
+  sudo nix flake update --no-warn-dirty || error "Flake update failed after edit."
   sudo darwin-rebuild switch --flake . || error "Build failed after edit."
   printf "\n%s\n" "Committing to git."
   git add flake.nix
