@@ -22,6 +22,7 @@
           btop
           coreutils
           curl
+          dnsutils
           docker
           docker-compose
           dos2unix
@@ -31,13 +32,18 @@
           fping
           gawk
           gdbm
+          gh
+          git
+          gnugrep
           gnused
           graphviz
+          htop
           iftop
           imagemagick
           imgcat
           intermodal
           inetutils
+          iperf
           jq
           gnumake
           minicom
@@ -73,6 +79,7 @@
           wget
           wireguard-tools
           xld
+          yq
           zig
           zlib       
         ];
