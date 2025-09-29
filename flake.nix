@@ -84,6 +84,13 @@
           zig
           zlib       
         ];
+      
+      homebrew = {
+        enable = true;
+        casks = [
+          "vscodium"
+        ];
+      };
 
       # Necessary for recommended use of flakes for managing nix-darwin
       nix.settings.experimental-features = "nix-command flakes";
