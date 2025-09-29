@@ -12,10 +12,10 @@ run-update()
     return 0
   fi
 
-  printf "\n%s" "Updating Nix...\n"
+  printf "\n%s\n" "Updating Nix..."
   if sudo nix flake update && sudo darwin-rebuild switch --flake .
   then
-    printf "\n%s" "Committing to git.\n"
+    printf "\n%s\n" "Committing to git."
     git add flake.nix
     git commit -m "Update on $(date)."
     git push -u origin main
