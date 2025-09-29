@@ -16,6 +16,7 @@
           ansible
           aria2
           arping
+          awscli2
           bash
           bash-completion
           btop
