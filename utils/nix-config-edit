@@ -3,33 +3,49 @@
 dir="/etc/nix-darwin"
 file="$dir/flake.nix"
 
+error()
+{
+  printf "Error: %s\n" "$1"
+  exit 1
+}
+
+pre-update()
+(
+  cd "$dir"
+  if git diff --quiet -- flake.nix
+  then
+    printf "\n%s\n" "Pulling updates before editing..."
+    git pull || error "Cannot pull update from git repository..."
+    sudo nix flake update || error "Flake update failed."
+    sudo darwin-rebuild switch --flake . || error "Update pulled from git failed to build."
+  fi
+)
+
 run-update() 
 (
   cd "$dir"
   if git diff --quiet -- flake.nix
   then
     echo "No changes to $file."
-    return 0
+    exit 0
   fi
 
   printf "\n%s\n" "Updating Nix..."
-  if sudo nix flake update && sudo darwin-rebuild switch --flake .
-  then
-    printf "\n%s\n" "Committing to git."
-    git add flake.nix
-    git commit -m "Update on $(date)."
-    git push -u origin main
-  else
-    return 1
-  fi
+  sudo nix flake update || error "Flake update failed after edit."
+  sudo darwin-rebuild switch --flake . || error "Build failed after edit."
+  printf "\n%s\n" "Committing to git."
+  git add flake.nix
+  git commit -m "Update on $(date)."
+  git push -u origin main
 )
 
-command -v git > /dev/null || { echo "Error: git not installed."; exit 1; }
-[ -d "$dir/.git" ] || { echo "Error: git repository not initialized in $dir"; exit 1; }
-[ -f "$file" ] || { echo "Error: $file does not exist."; exit 1; }
+command -v git > /dev/null || error "git not installed."
+[ -d "$dir/.git" ] || error "git repository not initialized in $dir"
+[ -f "$file" ] || error "$file does not exist."
 
 echo "Opening editor..."
 sudo nvim "$file"
 
+pre-update || exit 1
 run-update
 
