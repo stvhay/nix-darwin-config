@@ -63,6 +63,7 @@
           socat
           sox
           stockfish
+          uv
           vim
           watch
           wget
