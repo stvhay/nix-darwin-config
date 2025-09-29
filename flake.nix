@@ -34,6 +34,7 @@
           graphviz
           iftop
           imagemagick
+          imgcat
           intermodal
           inetutils
           jq
@@ -69,6 +70,7 @@
           watch
           wget
           wireguard-tools
+          xld
           zig
           zlib       
         ];
