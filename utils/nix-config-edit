@@ -48,4 +48,4 @@ sudo nvim "$file"
 
 pre-update || exit 1
 run-update
-
+sudo nix-collect-garbage --delete-older-than 7d
