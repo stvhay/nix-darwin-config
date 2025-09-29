@@ -131,6 +131,7 @@
       
       system.defaults = {
         dock.autohide = true;
+        finder.AppleShowAllFiles = true;
         finder.AppleShowAllExtensions = true;
         finder.FXPreferredViewStyle = "clmv";
         SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
