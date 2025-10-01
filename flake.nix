@@ -20,6 +20,7 @@
         bash
         bash-completion
         btop
+        colordiff
         coreutils
         curl
         dnsutils
