@@ -136,6 +136,8 @@
       programs.bash.enable = true;
       programs.bash.completion.enable = true;
 
+      programs.direnv.enable = true;
+
       security.pam.services.sudo_local.touchIdAuth = true;
 
       # Set Git commit hash for darwin-version.
