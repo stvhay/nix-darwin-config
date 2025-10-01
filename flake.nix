@@ -129,6 +129,10 @@
           "zed"
           "zoom"
         ];
+
+        masApps = {
+          WireGuard = 1451685025;
+        };
       };
 
       # Necessary for recommended use of flakes for managing nix-darwin
