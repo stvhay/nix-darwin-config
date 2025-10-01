@@ -47,6 +47,7 @@
         iperf
         jq
         gnumake
+        mas
         minicom
         mkvtoolnix
         moreutils
@@ -138,6 +139,13 @@
 
       programs.direnv.enable = true;
 
+      programs.gnupg.agent.enable = true;
+      programs.gnupg.agent.enableSSHSupport = true;
+
+      programs.nix-index.enable = true;
+
+      programs.vim.enable = true;
+      programs.vim.enableSensible = true;
       security.pam.services.sudo_local.touchIdAuth = true;
 
       # Set Git commit hash for darwin-version.
