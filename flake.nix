@@ -127,6 +127,7 @@
           "handbrake-app"
           "hex-fiend"
           "jellyfin-media-player"
+          "kitty"
           "knockknock"
           "logseq"
           "lulu"
