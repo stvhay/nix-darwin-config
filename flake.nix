@@ -60,8 +60,17 @@
           mosh
           mpv
           mtr
-          neovim
           netcat
+          (neovim.override {
+            configure = {
+              packages.myVimPlugins = with pkgs.vimPlugins; {
+                start = [
+                  neovim-sensible
+                  nvim-treesitter.withAllGrammars
+                ];
+              };
+            };
+          })
           nmap
           opusTools
           openssh
@@ -83,8 +92,6 @@
           stockfish
           tree
           uv
-          vim
-          vimPlugins.nvim-treesitter.withAllGrammars
           watch
           wezterm
           wget
