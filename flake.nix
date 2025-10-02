@@ -146,6 +146,7 @@
           "slack"
           "splice"
           "steam"
+          "utm"
           "vlc"
           "vscodium"
           "wireshark-app"
