@@ -80,6 +80,7 @@
           socat
           sox
           stockfish
+          tree
           uv
           vim
           vimPlugins.nvim-treesitter.withAllGrammars
