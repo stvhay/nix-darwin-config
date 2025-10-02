@@ -173,21 +173,26 @@
 
       security.pam.services.sudo_local.touchIdAuth = true;
 
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
+      system = {
+        # Set Git commit hash for darwin-version.
+        configurationRevision = self.rev or self.dirtyRev or null;
 
-      system.startup.chime = false;
-      system.defaults = {
-        dock.autohide = true;
-        finder = {
-          AppleShowAllFiles = true;
-          AppleShowAllExtensions = true;
-          FXPreferredViewStyle = "clmv";
+        startup.chime = false;
+
+        defaults = {
+          dock.autohide = true;
+
+          finder = {
+            AppleShowAllFiles = true;
+            AppleShowAllExtensions = true;
+            FXPreferredViewStyle = "clmv";
+          };
+
+          SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
         };
-        SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
-      };
       
-      system.primaryUser = "hays";
+        primaryUser = "hays";
+      };
 
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
