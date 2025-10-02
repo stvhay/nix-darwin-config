@@ -33,6 +33,7 @@
           docker-compose
           dos2unix
           dosbox-x
+          en-croissant
           ffmpeg
           findutils
           fping
