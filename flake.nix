@@ -113,6 +113,7 @@
           "1password-cli"
           "alt-tab"
           "balenaetcher"
+          "blockblock"
           "busycontacts"
           "caffeine"
           "daisydisk"
