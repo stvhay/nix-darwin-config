@@ -147,6 +147,7 @@
           "splice"
           "steam"
           "utm"
+          "virtualbox"
           "vlc"
           "vscodium"
           "wireshark-app"
