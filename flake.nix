@@ -140,6 +140,7 @@
           "steam"
           "vlc"
           "vscodium"
+          "wireshark-app"
           "zed"
           "zoom"
         ];
