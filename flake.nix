@@ -92,6 +92,7 @@
           stockfish
           tree
           uv
+          vim
           watch
           wezterm
           wget
@@ -99,7 +100,7 @@
           xld
           yq
           zig
-          zlib       
+          zlib
         ];
       };
 
@@ -179,11 +180,6 @@
         };
 
         nix-index.enable = true;
-
-        vim = {
-          enable = true;
-          enableSensible = true;
-        };
       };
 
       security.pam.services.sudo_local.touchIdAuth = true;
