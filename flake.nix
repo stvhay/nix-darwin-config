@@ -100,63 +100,75 @@
         noto-fonts-emoji
       ];
       
-      homebrew.enable = true;
-      homebrew.casks = [
-        "1password"
-        "1password-cli"
-        "alt-tab"
-        "balenaetcher"
-        "busycontacts"
-        "caffeine"
-        "daisydisk"
-        "discord"
-        "firefox@esr"
-        "firefox@developer-edition"
-        "element"
-        "ghostty"
-        "gimp"
-        "handbrake-app"
-        "jellyfin-media-player"
-        "knockknock"
-        "logseq"
-        "lulu"
-        "maintenance"
-        "movist-pro"
-        "rectangle"
-        "signal"
-        "slack"
-        "splice"
-        "steam"
-        "vlc"
-        "vscodium"
-        "zed"
-        "zoom"
-      ];
-      homebrew.masApps = {
-        "Logic Pro" = 634148309;
-        "Microsoft Remote Desktop" = 1295203466;
-        "MindNode" = 1289197285;
-        "TestFlight" = 899247664;
-        "The Unarchiver" = 425424353;
-        "WireGuard" = 1451685025;
+      homebrew = {
+        enable = true;
+
+        casks = [
+          "1password"
+          "1password-cli"
+          "alt-tab"
+          "balenaetcher"
+          "busycontacts"
+          "caffeine"
+          "daisydisk"
+          "discord"
+          "firefox@esr"
+          "firefox@developer-edition"
+          "element"
+          "ghostty"
+          "gimp"
+          "handbrake-app"
+          "jellyfin-media-player"
+          "knockknock"
+          "logseq"
+          "lulu"
+          "maintenance"
+          "movist-pro"
+          "rectangle"
+          "signal"
+          "slack"
+          "splice"
+          "steam"
+          "vlc"
+          "vscodium"
+          "zed"
+          "zoom"
+        ];
+
+        masApps = {
+          "Logic Pro" = 634148309;
+          "Microsoft Remote Desktop" = 1295203466;
+          "MindNode" = 1289197285;
+          "TestFlight" = 899247664;
+          "The Unarchiver" = 425424353;
+          "WireGuard" = 1451685025;
+        };
       };
 
       # Necessary for recommended use of flakes for managing nix-darwin
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-      programs.bash.enable = true;
-      programs.bash.completion.enable = true;
+      programs = {
+        bash = {
+          enable = true;
+          completion.enable = true;
+        };
 
-      programs.direnv.enable = true;
+        direnv.enable = true;
 
-      programs.gnupg.agent.enable = true;
-      programs.gnupg.agent.enableSSHSupport = true;
+        gnupg.agent = {
+          enable = true;
+          enableSSHSupport = true;
+        };
 
-      programs.nix-index.enable = true;
+        nix-index.enable = true;
 
-      programs.vim.enable = true;
-      programs.vim.enableSensible = true;
-      
+        vim = {
+          enable = true;
+          enableSensible = true;
+        };
+      };
+
       security.pam.services.sudo_local.touchIdAuth = true;
 
       # Set Git commit hash for darwin-version.
