@@ -82,6 +82,7 @@
           stockfish
           uv
           vim
+          vimPlugins.nvim-treesitter.withAllGrammars
           watch
           wezterm
           wget
