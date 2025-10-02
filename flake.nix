@@ -10,6 +10,8 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs }:
   let
     configuration = { pkgs, ... }: {
+      nixpkgs.hostPlatform = "aarch64-darwin";
+      
       environment.shells = [ pkgs.bash ];
       environment.systemPackages = with pkgs;
       [
@@ -96,48 +98,45 @@
         noto-fonts-emoji
       ];
       
-      homebrew = {
-        enable = true;
-        casks = [
-          "1password"
-          "1password-cli"
-          "alt-tab"
-          "balenaetcher"
-          "busycontacts"
-          "caffeine"
-          "daisydisk"
-          "discord"
-          "firefox@esr"
-          "firefox@developer-edition"
-          "element"
-          "ghostty"
-          "gimp"
-          "handbrake-app"
-          "jellyfin-media-player"
-          "knockknock"
-          "logseq"
-          "lulu"
-          "maintenance"
-          "movist-pro"
-          "rectangle"
-          "signal"
-          "slack"
-          "splice"
-          "steam"
-          "vlc"
-          "vscodium"
-          "zed"
-          "zoom"
-        ];
-
-        masApps = {
-          "Logic Pro" = 634148309;
-          "Microsoft Remote Desktop" = 1295203466;
-          MindNode = 1289197285;
-          TestFlight = 899247664;
-          "The Unarchiver" = 425424353;
-          WireGuard = 1451685025;
-        };
+      homebrew.enable = true;
+      homebrew.casks = [
+        "1password"
+        "1password-cli"
+        "alt-tab"
+        "balenaetcher"
+        "busycontacts"
+        "caffeine"
+        "daisydisk"
+        "discord"
+        "firefox@esr"
+        "firefox@developer-edition"
+        "element"
+        "ghostty"
+        "gimp"
+        "handbrake-app"
+        "jellyfin-media-player"
+        "knockknock"
+        "logseq"
+        "lulu"
+        "maintenance"
+        "movist-pro"
+        "rectangle"
+        "signal"
+        "slack"
+        "splice"
+        "steam"
+        "vlc"
+        "vscodium"
+        "zed"
+        "zoom"
+      ];
+      homebrew.masApps = {
+        "Logic Pro" = 634148309;
+        "Microsoft Remote Desktop" = 1295203466;
+        "MindNode" = 1289197285;
+        "TestFlight" = 899247664;
+        "The Unarchiver" = 425424353;
+        "WireGuard" = 1451685025;
       };
 
       # Necessary for recommended use of flakes for managing nix-darwin
@@ -155,17 +154,20 @@
 
       programs.vim.enable = true;
       programs.vim.enableSensible = true;
+      
       security.pam.services.sudo_local.touchIdAuth = true;
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
-      
+
       system.startup.chime = false;
       system.defaults = {
         dock.autohide = true;
-        finder.AppleShowAllFiles = true;
-        finder.AppleShowAllExtensions = true;
-        finder.FXPreferredViewStyle = "clmv";
+        finder = {
+          AppleShowAllFiles = true;
+          AppleShowAllExtensions = true;
+          FXPreferredViewStyle = "clmv";
+        };
         SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
       };
       
@@ -174,9 +176,6 @@
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
       system.stateVersion = 6;
-
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
     };
   in
   {
