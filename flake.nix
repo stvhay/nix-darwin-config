@@ -165,6 +165,23 @@
         };
       };
 
+      launchd.daemons.nixDarwinUpgrade = {
+        script = ''
+          /bin/nix-channel --update
+          /bin/nix flake update 
+          /bin/darwin-rebuild switch --flake .
+        '';
+        serviceConfig = {
+          StartInterval = 86400; # every 24 hours
+          RunAtLoad = true;
+          WorkingDirectory = "/etc/nix-darwin";
+          StandardOutPath = "/tmp/nixdarwin-upgrade.log";
+          StandardErrorPath = "/tmp/nixdarwin-upgrade-error.log";
+          UserName = "root";
+        };
+        path = [ pkgs.nix ];
+      };
+
       # Necessary for recommended use of flakes for managing nix-darwin
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
