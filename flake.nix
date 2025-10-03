@@ -169,7 +169,7 @@
         script = ''
           nix-channel --update
           nix flake update 
-          darwin-rebuild switch --flake .
+          /run/current-system/sw/bin/darwin-rebuild switch --flake .
         '';
         serviceConfig = {
           StartInterval = 86400; # every 24 hours
