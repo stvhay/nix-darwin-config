@@ -167,9 +167,9 @@
 
       launchd.daemons.nixDarwinUpgrade = {
         script = ''
-          /bin/nix-channel --update
-          /bin/nix flake update 
-          /bin/darwin-rebuild switch --flake .
+          nix-channel --update
+          nix flake update 
+          darwin-rebuild switch --flake .
         '';
         serviceConfig = {
           StartInterval = 86400; # every 24 hours
