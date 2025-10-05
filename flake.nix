@@ -16,92 +16,7 @@
       
       environment = {
         shells = [ pkgs.bash ];
-        systemPackages = with pkgs;
-        [
-          ansible
-          aria2
-          arping
-          awscli2
-          bash
-          bash-completion
-          btop
-          colordiff
-          coreutils
-          curl
-          dnsutils
-          docker
-          docker-compose
-          dos2unix
-          dosbox-x
-          en-croissant
-          ffmpeg
-          findutils
-          fping
-          gawk
-          gdbm
-          gh
-          git
-          gnugrep
-          gnused
-          graphviz
-          htop
-          iftop
-          imagemagick
-          imgcat
-          intermodal
-          inetutils
-          iperf
-          jq
-          gnumake
-          mas
-          minicom
-          mkvtoolnix
-          moreutils
-          mosh
-          mpv
-          mtr
-          netcat
-          (neovim.override {
-            configure = {
-              packages.myVimPlugins = with pkgs.vimPlugins; {
-                start = [
-                  neovim-sensible
-                  nvim-treesitter.withAllGrammars
-                ];
-              };
-            };
-          })
-          nmap
-          opusTools
-          openssh
-          pass
-          picocom
-          pstree
-          pwgen
-          python3
-          rclone
-          restic
-          ripgrep
-          rsync
-          ruff
-          screen
-          shellcheck
-          smartmontools
-          socat
-          sox
-          stockfish
-          tree
-          uv
-          vim
-          watch
-          wezterm
-          wget
-          wireguard-tools
-          xld
-          yq
-          zig
-          zlib
-        ];
+        systemPackages = import ./systemPackages.nix pkgs;
       };
 
       fonts.packages = with pkgs; [
@@ -148,8 +63,10 @@
           "steam"
           "utm"
           "virtualbox"
+          "visual-studio-code"
           "vlc"
           "vscodium"
+          "wezterm"
           "wireshark-app"
           "zed"
           "zoom"
@@ -167,7 +84,8 @@
 
       launchd.daemons.nixDarwinUpgrade = {
         script = ''
-          nix-channel --update
+          printf "----------\n%s----------\n" "$(date)"
+          nix-channel  --update
           nix flake update 
           /run/current-system/sw/bin/darwin-rebuild switch --flake .
         '';
@@ -175,8 +93,8 @@
           StartInterval = 86400; # every 24 hours
           RunAtLoad = true;
           WorkingDirectory = "/etc/nix-darwin";
-          StandardOutPath = "/tmp/nixdarwin-upgrade.log";
-          StandardErrorPath = "/tmp/nixdarwin-upgrade-error.log";
+          StandardOutPath = "/var/log/nixdarwin-upgrade.log";
+          StandardErrorPath = "/var/log/nixdarwin-upgrade-error.log";
           UserName = "root";
         };
         path = [ pkgs.nix ];
@@ -195,7 +113,7 @@
 
         gnupg.agent = {
           enable = true;
-          enableSSHSupport = true;
+          #enableSSHSupport = true;
         };
 
         nix-index.enable = true;

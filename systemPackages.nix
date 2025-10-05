@@ -1,0 +1,88 @@
+pkgs: with pkgs;
+[
+  ansible
+  aria2
+  arping
+  awscli2
+  bash
+  bash-completion
+  btop
+  colordiff
+  coreutils
+  curl
+  dnsutils
+  docker
+  docker-compose
+  dos2unix
+  dosbox-x
+  en-croissant
+  ffmpeg
+  findutils
+  fping
+  gawk
+  gdbm
+  gh
+  git
+  gnugrep
+  gnused
+  graphviz
+  htop
+  iftop
+  imagemagick
+  imgcat
+  intermodal
+  inetutils
+  iperf
+  jq
+  gnumake
+  mas
+  minicom
+  mkvtoolnix
+  moreutils
+  mosh
+  mpv
+  mtr
+  netcat
+  nixd
+  nixfmt
+  (neovim.override {
+    configure = {
+      packages.myVimPlugins = with pkgs.vimPlugins; {
+        start = [
+          neovim-sensible
+          nvim-treesitter.withAllGrammars
+        ];
+      };
+    };
+  })
+  nmap
+  opusTools
+  openssh
+  pass
+  picocom
+  pstree
+  pwgen
+  python3
+  rclone
+  restic
+  ripgrep
+  rsync
+  ruff
+  screen
+  shellcheck
+  smartmontools
+  socat
+  sox
+  stockfish
+  tree
+  uv
+  vim
+  watch
+  wget
+  wireguard-tools
+  xld
+  yq
+  zig
+  zlib
+]
+
