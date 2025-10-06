@@ -18,6 +18,10 @@
       environment = {
         shells = [ pkgs.bash ];
         systemPackages = import ./conf/environment.systemPackages.nix pkgs;
+        variables = {
+          EDITOR = "nvim";
+          VISUAL = "nvim";
+        };
       };
 
       fonts.packages = import ./conf/fonts.packages.nix pkgs;
