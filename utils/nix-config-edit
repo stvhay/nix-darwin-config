@@ -3,52 +3,49 @@
 dir="/etc/nix-darwin"
 file="$dir/flake.nix"
 
-error()
-{
-  printf "Error: %s\n" "$1"
-  exit 1
-}
+error()      { >&2 printf "Error: %s\n" "$1";         exit 1; }
+impossible() { >&2 printf "%s\n" "Assertion failed!"; exit 2; }
+section()    { printf "\n[%s]\n" "$1"; }
+status()     { printf ".%s\n"    "$1"; }
+sudo_()      { sudo sh -c 'umask 0002 && exec "$@"' sh "$@"; }
 
-sudo_()
-{
-  sudo sh -c 'umask 0002 && exec "$@"' sh "$@"
-}
+git_is_clean()     { git diff HEAD --quiet; }
+git_installed()    { command -v git > /dev/null; }
+conf_is_git_repo() { [ -d "$dir/.git" ]; }
+conf_present()     { [ -f "$file" ]; }
 
-pre-update()
+
+#### Main Script
+section "Checking Script Dependencies"
+git_installed    || error "git not installed."
+conf_is_git_repo || error "git repository not initialized in $dir"
+conf_present     || error "$file does not exist."
 (
-  cd "$dir"
-  if git diff --quiet
+  cd "$dir" || impossible
+
+  section "Preconfiguration Steps"
+  status "Checking git for updates..."
+  if git_is_clean
   then
-    printf "\n%s\n" "Pulling updates before editing..."
+    status "Pulling updatdes before editing..."
     git pull || error "Cannot pull update from git repository..."
   fi
-)
 
-run-update() 
-(
-  cd "$dir"
-  if git diff HEAD --quiet
+  section "Opening editor"
+  nvim "$dir"
+  status "Editing complete."
+
+  section "Post-configuration Steps"
+  if git_is_clean
   then
-    echo "No staged or unstaged changes to $dir."
-    exit 0
+    status "No staged or unstaged changes to $dir."
+  else
+    status "Updating Nix..."
+    nix flake update --no-warn-dirty      || error "Flake update failed after edit."
+    sudo_ darwin-rebuild switch --flake . || error "Build failed after edit."
+    status "Success. Committing to git."
+    git add -A
+    git commit              || error "Commit failed."
+    git push -u origin main || error "Push failed."
   fi
-
-  printf "\n%s\n" "Updating Nix..."
-  nix flake update --no-warn-dirty || error "Flake update failed after edit."
-  sudo_ darwin-rebuild switch --flake . || error "Build failed after edit."
-  printf "\n%s\n" "Committing to git."
-  git add -A
-  git commit -m "Update on $(date)."
-  git push -u origin main
 )
-
-command -v git > /dev/null || error "git not installed."
-[ -d "$dir/.git" ] || error "git repository not initialized in $dir"
-[ -f "$file" ] || error "$file does not exist."
-
-echo "Opening editor..."
-nvim "$dir"
-
-pre-update || exit 1
-run-update
-
