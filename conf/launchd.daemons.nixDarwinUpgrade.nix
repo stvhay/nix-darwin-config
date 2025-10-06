@@ -4,7 +4,7 @@ pkgs: with pkgs;
     printf "----------\n%s----------\n" "$(date)"
     nix-channel  --update
     nix flake update 
-    /run/current-system/sw/bin/darwin-rebuild switch --flake .
+    darwin-rebuild switch --flake .
   '';
   serviceConfig = {
     StartInterval = 86400; # every 24 hours
@@ -14,5 +14,5 @@ pkgs: with pkgs;
     StandardErrorPath = "/var/log/nixdarwin-upgrade-error.log";
     UserName = "root";
   };
-  path = [ pkgs.nix ];
+  path = [ pkgs.nix pkgs.git pkgs.coreutils pkgs.findutils ];
 }
