@@ -5,77 +5,50 @@ file="$dir/flake.nix"
 
 error()
 {
-    printf "Error: %s\n" "$1"
-    exit 1
+  printf "Error: %s\n" "$1"
+  exit 1
 }
 
-dep_check()
+sudo_()
 {
-    for cmds in git nvim sudo
-    do
-        command -v "$cmds" > /dev/null || error "$cmds not installed."
-    done
-    [ -d "$dir/.git" ]          || error "git repository not initialized in $dir"
-    [ -f "$file" ]              || error "$file does not exist."    
+  sudo sh -c 'umask 0002 && exec "$@"' sh "$@"
 }
 
-git_changed()
-{
-    ! git -C "$dir" diff --quiet -- flake.nix
-}
-
-git_commit()
-{
-    printf "\n%s\n" "Committing to git."
-    git -C "$dir" add flake.nix
-    if git -C "$dir" commit -s 
-    then
-        git -C "$dir" push -u origin main || error "failed to push changes to git repository."
-    else
-        error "failed to commit changes to git repository."
-    fi
-}
-
-nix_update()
+pre-update()
 (
-    error_context="$1"
-    if [ -d "$dir" ]
-    then
-        cd "$dir"
-        sudo nix flake update --no-warn-dirty || error "${error_context}: flake update failed."
-        sudo darwin-rebuild switch --flake .  || error "${error_context}: nix-darwin failed to build."
-    fi
+  cd "$dir"
+  if git diff --quiet
+  then
+    printf "\n%s\n" "Pulling updates before editing..."
+    git pull || error "Cannot pull update from git repository..."
+  fi
 )
 
-pre_update()
-{
-    if ! git_changed
-    then
-        printf "\n%s\n" "Pulling updates before editing..."
-        git -C "$dir" pull || error "Cannot pull update from git repository..."
-        nix_update "pre-update git pull" || exit 1
-    fi
-}
-
-run_update()
-{
-  if ! git_changed
+run-update() 
+(
+  cd "$dir"
+  if git diff HEAD --quiet
   then
-    echo "No changes to $file."
+    echo "No staged or unstaged changes to $dir."
     exit 0
   fi
 
   printf "\n%s\n" "Updating Nix..."
-  nix_update "rebuild changed configuration" || exit 1
-  git_commit || exit 1
-}
+  nix flake update --no-warn-dirty || error "Flake update failed after edit."
+  sudo_ darwin-rebuild switch --flake . || error "Build failed after edit."
+  printf "\n%s\n" "Committing to git."
+  git add -A
+  git commit -m "Update on $(date)."
+  git push -u origin main
+)
 
-dep_check
-pre_update || exit 1
+command -v git > /dev/null || error "git not installed."
+[ -d "$dir/.git" ] || error "git repository not initialized in $dir"
+[ -f "$file" ] || error "$file does not exist."
 
 echo "Opening editor..."
-sudo nvim "$file"
+nvim "$dir"
 
-run_update || exit 1
-sudo nix-collect-garbage --delete-older-than 7d
+pre-update || exit 1
+run-update
 
