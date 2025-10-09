@@ -2,6 +2,7 @@
   "1password"
   "1password-cli"
   "alt-tab"
+  "audacity"
   "balenaetcher"
   "blockblock"
   "busycontacts"
