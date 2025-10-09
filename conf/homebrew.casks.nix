@@ -36,5 +36,6 @@
   "wezterm"
   "wireshark-app"
   "zed"
+  "zettlr"
   "zoom"
 ]
