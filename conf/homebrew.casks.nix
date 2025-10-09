@@ -23,6 +23,7 @@
   "logseq"
   "lulu"
   "maintenance"
+  "mactex"
   "movist-pro"
   "rectangle"
   "signal"
