@@ -42,6 +42,7 @@ pkgs: with pkgs;
   mosh
   mpv
   mtr
+  nerdfetch
   netcat
   nixd
   nixfmt
