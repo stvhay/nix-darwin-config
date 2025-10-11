@@ -35,6 +35,7 @@ pkgs: with pkgs;
   iperf
   jq
   gnumake
+  macpm
   mas
   minicom
   mkvtoolnix
