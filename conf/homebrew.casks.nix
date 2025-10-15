@@ -26,6 +26,7 @@
   "mactex"
   "movist-pro"
   "rectangle"
+  "rustdesk"
   "signal"
   "slack"
   "splice"
