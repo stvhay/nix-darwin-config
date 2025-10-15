@@ -47,28 +47,7 @@ pkgs: with pkgs;
   netcat
   nixd
   nixfmt
-  (neovim.override {
-    configure = {
-      luaRcContent = ''
-        -- Nix/system config here
-
-        -- Load user config if it exists
-        local home_init = os.getenv("HOME") .. "/.config/nvim/init.lua"
-        local f = io.open(home_init, "r")
-        if f then
-          f:close()
-          vim.cmd("luafile " .. home_init)
-        end
-      '';
-
-      packages.myVimPlugins = with pkgs.vimPlugins; {
-        start = [
-          neovim-sensible
-          nvim-treesitter.withAllGrammars
-        ];
-      };
-    };
-  })
+  neovim-unwrapped
   nmap
   opusTools
   openssh
