@@ -16,9 +16,13 @@ pkgs: with pkgs;
   dos2unix
   dosbox-x
   en-croissant
+  eza
+  fastfetch
+  fd
   ffmpeg
   findutils
   fping
+  fzf
   gawk
   gdbm
   gh
@@ -76,6 +80,7 @@ pkgs: with pkgs;
   xld
   yq
   zig
+  zoxide
   zlib
 ]
 
