@@ -8,6 +8,7 @@
   "busycontacts"
   "caffeine"
   "calibre"
+  "claude-code"
   "daisydisk"
   "discord"
   "firefox@esr"
