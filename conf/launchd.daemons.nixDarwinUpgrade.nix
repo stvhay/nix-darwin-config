@@ -2,13 +2,13 @@ pkgs: with pkgs;
 {
   script = ''
     printf "----------\n%s----------\n" "$(date)"
-    nix-channel  --update
-    nix flake update 
-    darwin-rebuild switch --flake .
+    ${pkgs.nix}/bin/nix-channel --update
+    ${pkgs.nix}/bin/nix flake update --commit-lock-file 
+    ${pkgs.nix}/bin/darwin-rebuild switch --flake .
   '';
   serviceConfig = {
     StartInterval = 86400; # every 24 hours
-    RunAtLoad = true;
+    RunAtLoad = false;
     WorkingDirectory = "/etc/nix-darwin";
     StandardOutPath = "/var/log/nixdarwin-upgrade.log";
     StandardErrorPath = "/var/log/nixdarwin-upgrade-error.log";
