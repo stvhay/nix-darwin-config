@@ -1,10 +1,12 @@
 pkgs: with pkgs;
 {
   script = ''
-    printf --  "----------\n%s----------\n" "$(date)"
-    ${pkgs.nix}/bin/nix-channel --update
-    ${pkgs.nix}/bin/nix flake update --commit-lock-file 
-    ${pkgs.nix}/bin/darwin-rebuild switch --flake .
+    printf --  "----------\n%s\n----------\n\n" "$(date)"
+    chown -R root:wheel /etc/nix-darwin
+    nix-channel --update
+    nix flake update --commit-lock-file 
+    darwin-rebuild switch --flake .
+    chown -R hays:admin /etc/nix-darwin
   '';
   serviceConfig = {
     StartInterval = 86400; # every 24 hours
