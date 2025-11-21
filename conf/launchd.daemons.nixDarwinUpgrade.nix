@@ -1,7 +1,7 @@
 pkgs: with pkgs;
 {
   script = ''
-    printf "----------\n%s----------\n" "$(date)"
+    printf --  "----------\n%s----------\n" "$(date)"
     ${pkgs.nix}/bin/nix-channel --update
     ${pkgs.nix}/bin/nix flake update --commit-lock-file 
     ${pkgs.nix}/bin/darwin-rebuild switch --flake .
