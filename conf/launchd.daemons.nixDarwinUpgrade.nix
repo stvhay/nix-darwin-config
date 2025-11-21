@@ -2,8 +2,11 @@ pkgs: with pkgs;
 {
   script = ''
     printf --  "----------\n%s\n----------\n\n" "$(date)"
+    printf -- "-- nix-channel -- \n"
     /usr/bin/sudo -u hays /run/current-system/sw/bin/nix-channel --update
+    printf -- "-- nix flake -- \n"
     /usr/bin/sudo -u hays /run/current-system/sw/bin/nix flake update --commit-lock-file 
+    printf -- "-- darwin-rebuild -- \n"
     /run/current-system/sw/bin/darwin-rebuild switch --flake .
     chown -R hays:admin /etc/nix-darwin
   '';
