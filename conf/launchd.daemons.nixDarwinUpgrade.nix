@@ -2,8 +2,7 @@ pkgs: with pkgs;
 {
   script = ''
     printf --  "----------\n%s\n----------\n\n" "$(date)"
-    export HOME=/Users/hays
-    git config --global --add safe.directory /etc/nix-darwin
+    chown -R root:wheel /etc/nix-darwin
     printf "NIX-CHANNEL\n" >&2
     /usr/bin/sudo -u hays /run/current-system/sw/bin/nix-channel --update
     printf "NIX FLAKE UPDATE\n" >&2
