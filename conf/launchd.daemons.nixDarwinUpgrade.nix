@@ -2,6 +2,7 @@ pkgs: with pkgs;
 {
   script = ''
     printf --  "----------\n%s\n----------\n\n" "$(date)"
+    export HOME=/var/root
     git config --global --add safe.directory /etc/nix-darwin
     /usr/bin/sudo -u hays /run/current-system/sw/bin/nix-channel --update
     /usr/bin/sudo -u hays /run/current-system/sw/bin/nix flake update --commit-lock-file 
