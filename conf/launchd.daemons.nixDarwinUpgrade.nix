@@ -4,8 +4,11 @@ pkgs: with pkgs;
     printf --  "----------\n%s\n----------\n\n" "$(date)"
     export HOME=/Users/hays
     git config --global --add safe.directory /etc/nix-darwin
+    printf "NIX-CHANNEL\n"
     /usr/bin/sudo -u hays /run/current-system/sw/bin/nix-channel --update
+    printf "NIX FLAKE UPDATE\n"
     /usr/bin/sudo -u hays /run/current-system/sw/bin/nix flake update --commit-lock-file 
+    printf "DARWIN-REBUILD\n"
     /run/current-system/sw/bin/darwin-rebuild switch --flake .
     chown -R hays:admin /etc/nix-darwin
   '';
