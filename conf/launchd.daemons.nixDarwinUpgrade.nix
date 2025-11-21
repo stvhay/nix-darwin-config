@@ -3,9 +3,9 @@ pkgs: with pkgs;
   script = ''
     printf --  "----------\n%s\n----------\n\n" "$(date)"
     chown -R root:wheel /etc/nix-darwin
-    nix-channel --update
-    nix flake update --commit-lock-file 
-    darwin-rebuild switch --flake .
+    /run/current-system/sw/bin/nix-channel --update
+    /run/current-system/sw/bin/nix flake update --commit-lock-file 
+    /run/current-system/sw/bin/darwin-rebuild switch --flake .
     chown -R hays:admin /etc/nix-darwin
   '';
   serviceConfig = {
