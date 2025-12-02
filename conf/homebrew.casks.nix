@@ -26,6 +26,7 @@
   "maintenance"
   "mactex"
   "movist-pro"
+  "onyx"
   "rectangle"
   "rustdesk"
   "signal"
