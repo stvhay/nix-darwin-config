@@ -15,7 +15,6 @@ pkgs: with pkgs;
   docker-compose
   dos2unix
   dosbox-x
-  en-croissant
   eza
   fastfetch
   fd
