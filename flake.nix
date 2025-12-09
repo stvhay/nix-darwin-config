@@ -13,6 +13,7 @@
   let
     configuration = { pkgs, ... }: {
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
+      nixpkgs.config = import ./conf/nixpkgs.config.nix { lib = pkgs.lib; };
       nixpkgs.hostPlatform = "aarch64-darwin";
       
       environment = {

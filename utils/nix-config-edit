@@ -9,7 +9,11 @@ section()    { printf "\n[%s]\n" "$1"; }
 status()     { printf ".%s\n"    "$1"; }
 sudo_()      { sudo sh -c 'umask 0002 && exec "$@"' sh "$@"; }
 
-git_is_clean()     { git diff HEAD --quiet; }
+git_is_clean() {
+  git diff --quiet && \
+  git diff --cached --quiet && \
+  [ -z "$(git ls-files --others --exclude-standard)" ]
+}
 git_installed()    { command -v git > /dev/null; }
 conf_is_git_repo() { [ -d "$dir/.git" ]; }
 conf_present()     { [ -f "$file" ]; }
@@ -27,7 +31,7 @@ conf_present     || error "$file does not exist."
   status "Checking git for updates..."
   if git_is_clean
   then
-    status "Pulling updatdes before editing..."
+    status "Pulling updates before editing..."
     git pull || error "Cannot pull update from git repository..."
   fi
 
@@ -38,14 +42,16 @@ conf_present     || error "$file does not exist."
   section "Post-configuration Steps"
   if git_is_clean
   then
-    status "No staged or unstaged changes to $dir."
+    status "No changes to $dir."
   else
+    status "Staging all changes..."
+    git add -A || error "Failed to stage changes."
     status "Updating Nix..."
     nix flake update --no-warn-dirty      || error "Flake update failed after edit."
     sudo_ darwin-rebuild switch --flake . || error "Build failed after edit."
     status "Success. Committing to git."
-    git add -A
     git commit              || error "Commit failed."
     git push -u origin main || error "Push failed."
   fi
 )
+
