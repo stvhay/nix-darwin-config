@@ -9,7 +9,7 @@ pkgs: with pkgs;
   btop
   claude-code
   colordiff
-  coreutils
+  coreutils-prefixed
   curl
   dnsutils
   docker
