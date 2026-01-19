@@ -60,7 +60,6 @@ pkgs: with pkgs;
   pstree
   pwgen
   python3
-  qrencode
   rclone
   restic
   ripgrep
