@@ -22,6 +22,7 @@ pkgs: with pkgs;
   ffmpeg
   findutils
   fping
+  fswatch
   fzf
   gawk
   gdbm
