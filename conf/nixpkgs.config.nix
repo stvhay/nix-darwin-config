@@ -4,4 +4,3 @@
     "claude-code"
   ];
 }
-

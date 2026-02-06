@@ -16,7 +16,8 @@
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       nixpkgs.config = import ./conf/nixpkgs.config.nix { lib = pkgs.lib; };
       nixpkgs.hostPlatform = "aarch64-darwin";
-      
+      nixpkgs.overlays = [ claude-code.overlays.default ];
+
       environment = {
         shells = [ pkgs.bash ];
         systemPackages = import ./conf/environment.systemPackages.nix pkgs;
