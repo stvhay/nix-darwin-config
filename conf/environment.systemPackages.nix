@@ -36,7 +36,6 @@ pkgs: with pkgs;
   imagemagick
   imgcat
   intermodal
-  inetutils
   iperf
   jq
   gnumake
