@@ -19,6 +19,11 @@
       nixpkgs.overlays = [ claude-code.overlays.default ];
 
       environment = {
+        etc."newsyslog.d/nixdarwin-upgrade.conf".text = ''
+          # logfilename                          mode count size when  flags
+          /var/log/nixdarwin-upgrade.log          644  3     512  *     J
+          /var/log/nixdarwin-upgrade-error.log    644  3     512  *     J
+        '';
         shells = [ pkgs.bash ];
         systemPackages = import ./conf/environment.systemPackages.nix pkgs;
         variables = {
