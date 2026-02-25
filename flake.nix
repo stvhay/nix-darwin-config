@@ -36,7 +36,8 @@
       
       homebrew = {
         enable  = true;
-        casks   = import ./conf/homebrew.casks.nix ;
+        brews   = import ./conf/homebrew.brews.nix;
+        casks   = import ./conf/homebrew.casks.nix;
         masApps = import ./conf/homebrew.masApps.nix;
       };
 
