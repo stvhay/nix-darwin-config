@@ -41,6 +41,7 @@ pkgs: with pkgs;
   gnumake
   macpm
   mas
+  mdfried
   minicom
   mkvtoolnix
   moreutils
