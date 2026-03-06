@@ -3,21 +3,19 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
-    claude-code.url = "github:sadjow/claude-code-nix";
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, claude-code }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs }:
   let
     configuration = { pkgs, ... }: {
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       nixpkgs.config = import ./conf/nixpkgs.config.nix { lib = pkgs.lib; };
       nixpkgs.hostPlatform = "aarch64-darwin";
       nixpkgs.overlays = [
-          claude-code.overlays.default
           # nixpkgs ships curl-cffi 0.14.0b2 (beta) whose test suite crashes
           # on macOS due to a thread-safety bug in test teardown fixtures.
           # Pulled in via: mpv → yt-dlp → curl-cffi.
