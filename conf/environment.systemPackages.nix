@@ -7,7 +7,6 @@ pkgs: with pkgs;
   bash
   bash-completion
   btop
-  claude-code
   colordiff
   coreutils-prefixed
   curl
