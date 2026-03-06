@@ -16,7 +16,18 @@
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
       nixpkgs.config = import ./conf/nixpkgs.config.nix { lib = pkgs.lib; };
       nixpkgs.hostPlatform = "aarch64-darwin";
-      nixpkgs.overlays = [ claude-code.overlays.default ];
+      nixpkgs.overlays = [
+          claude-code.overlays.default
+          # nixpkgs ships curl-cffi 0.14.0b2 (beta) whose test suite crashes
+          # on macOS due to a thread-safety bug in test teardown fixtures.
+          # Pulled in via: mpv → yt-dlp → curl-cffi.
+          # Remove this override once nixpkgs bumps to a stable curl-cffi.
+          (final: prev: {
+            python313Packages = prev.python313Packages.overrideScope (pfinal: pprev: {
+              curl-cffi = pprev.curl-cffi.overridePythonAttrs { doCheck = false; };
+            });
+          })
+        ];
 
       environment = {
         etc."newsyslog.d/nixdarwin-upgrade.conf".text = ''

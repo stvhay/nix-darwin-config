@@ -1,4 +1,5 @@
 [
   "beads"
   "colima"
+  "container"
 ]
