@@ -45,6 +45,7 @@
       
       homebrew = {
         enable  = true;
+        taps    = [ "cirruslabs/cli" ];
         brews   = import ./conf/homebrew.brews.nix;
         casks   = import ./conf/homebrew.casks.nix;
         masApps = import ./conf/homebrew.masApps.nix;
