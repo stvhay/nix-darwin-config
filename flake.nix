@@ -3,47 +3,36 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
+    nixpkgs-mpv.url = "github:NixOS/nixpkgs/e3dc44fc3cfc7f5e8d96f6cfc87eeb26a324164a";
     nix-darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgs-mpv }:
   let
     configuration = { pkgs, ... }: {
       nix.settings.experimental-features = [ "nix-command" "flakes" ];
+      nix.settings.sandbox = "relaxed";
       nixpkgs.config = import ./conf/nixpkgs.config.nix { lib = pkgs.lib; };
       nixpkgs.hostPlatform = "aarch64-darwin";
       nixpkgs.overlays = [
-            (final: prev: {
-              direnv = prev.direnv.overrideAttrs (_: {
-                doCheck = false;
-                doInstallCheck = false;
-              });
-              mpv-unwrapped = prev.mpv-unwrapped.overrideAttrs (_: {
-              doInstallCheck = false;
-            });
-          })
-
-          (final: prev: {
-            direnv = prev.direnv.overrideAttrs (_: {
+        (final: prev: 
+          let
+            pinned = import nixpkgs-mpv {
+              system = prev.stdenv.hostPlatform.system;
+              config = prev.config;
+            };
+          in {
+            mpv = pinned.mpv;
+            mpv-unwrapped = pinned.mpv-unwrapped;
+            fish = prev.fish.overrideAttrs (old: {
               doCheck = false;
               doInstallCheck = false;
             });
           })
-
-          # nixpkgs ships curl-cffi 0.14.0b2 (beta) whose test suite crashes
-          # on macOS due to a thread-safety bug in test teardown fixtures.
-          # Pulled in via: mpv → yt-dlp → curl-cffi.
-          # Remove this override once nixpkgs bumps to a stable curl-cffi.
-          (final: prev: {
-            python313Packages = prev.python313Packages.overrideScope (pfinal: pprev: {
-              curl-cffi = pprev.curl-cffi.overridePythonAttrs { doCheck = false; };
-            });
-          })
-        ];
-
+      ];
       environment = {
         etc."newsyslog.d/nixdarwin-upgrade.conf".text = ''
           # logfilename                          mode count size when  flags
