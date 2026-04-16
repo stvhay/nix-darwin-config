@@ -16,6 +16,23 @@
       nixpkgs.config = import ./conf/nixpkgs.config.nix { lib = pkgs.lib; };
       nixpkgs.hostPlatform = "aarch64-darwin";
       nixpkgs.overlays = [
+            (final: prev: {
+              direnv = prev.direnv.overrideAttrs (_: {
+                doCheck = false;
+                doInstallCheck = false;
+              });
+              mpv-unwrapped = prev.mpv-unwrapped.overrideAttrs (_: {
+              doInstallCheck = false;
+            });
+          })
+
+          (final: prev: {
+            direnv = prev.direnv.overrideAttrs (_: {
+              doCheck = false;
+              doInstallCheck = false;
+            });
+          })
+
           # nixpkgs ships curl-cffi 0.14.0b2 (beta) whose test suite crashes
           # on macOS due to a thread-safety bug in test teardown fixtures.
           # Pulled in via: mpv → yt-dlp → curl-cffi.
