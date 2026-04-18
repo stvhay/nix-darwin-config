@@ -71,6 +71,7 @@ pkgs: with pkgs;
   socat
   sox
   stockfish
+  tmux
   tree
   uv
   vim
