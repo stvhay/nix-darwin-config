@@ -1,7 +1,9 @@
 pkgs: with pkgs;
 [
+  age
   ansible
   aria2
+  autossh
   arping
   awscli2
   bash
@@ -37,6 +39,7 @@ pkgs: with pkgs;
   iperf
   jq
   gnumake
+  macmon
   macpm
   mas
   mdfried
