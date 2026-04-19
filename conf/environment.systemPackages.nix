@@ -16,7 +16,6 @@ pkgs: with pkgs;
   dos2unix
   dosbox-x
   eza
-  fastfetch
   fd
   ffmpeg
   findutils

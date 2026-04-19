@@ -1,5 +1,4 @@
 [
-  "beads"
   "colima"
   "container"
   "tart"
