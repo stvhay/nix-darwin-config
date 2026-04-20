@@ -16,7 +16,7 @@ pkgs: with pkgs;
     run_as_hays bash -c 'cd /etc/nix-darwin && /run/current-system/sw/bin/nix flake update --commit-lock-file' 2>&1
 
     # Build and switch — needs root
-    echo "nix rebuild and switch..."
+    echo "nix rebuild and switch... (pwd=$(pwd) "id=$(id))"
     if /run/current-system/sw/bin/darwin-rebuild switch --flake /etc/nix-darwin 2>&1; then
       printf "\nSUCCESS: darwin-rebuild switch completed\n"
     else
@@ -24,7 +24,7 @@ pkgs: with pkgs;
       exit 1
     fi
     
-    # Homebrew — independent, runs as hays
+    # Homebrew
     echo "homebrew update"
     run_as_hays bash --login -c "brew update && brew upgrade" 2>&1
   '';
