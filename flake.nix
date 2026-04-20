@@ -44,6 +44,7 @@
         etc."gitconfig".text = ''
           [safe]
             directory = /etc/nix-darwin
+            directory = /private/etc/nix-darwin
         '';
         etc."newsyslog.d/nixdarwin-upgrade.conf".text = ''
           # logfilename                          mode count size when  flags
