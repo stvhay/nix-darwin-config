@@ -8,21 +8,25 @@ pkgs: with pkgs;
     # All git/nix operations run as hays (repo owner)
     run_as_hays() { /usr/bin/sudo -i -u hays -- "$@"; }
 
+    echo "nix channel update..."
     run_as_hays /run/current-system/sw/bin/nix-channel --update 2>&1
 
     # Update flake inputs and commit lock file
+    echo "nix flake update..."
     run_as_hays bash -c 'cd /etc/nix-darwin && /run/current-system/sw/bin/nix flake update --commit-lock-file' 2>&1
 
     # Build and switch — needs root
-    if /run/current-system/sw/bin/darwin-rebuild switch --flake /etc/nix-darwin 2>&1; then
+    echo "nix rebuild and switch..."
+    if /run/current-system/sw/bin/darwin-versionarwin-rebuild switch --flake /etc/nix-darwin 2>&1; then
       printf "\nSUCCESS: darwin-rebuild switch completed\n"
     else
       printf "\nFAILURE: darwin-rebuild switch exited %d\n" "$?"
       exit 1
     fi
-
+    
     # Homebrew — independent, runs as hays
-    run_as_hays bash --login -c "brew upgrade" 2>&1
+    echo "homebrew update"
+    run_as_hays bash --login -c "brew update && brew upgrade" 2>&1
   '';
   serviceConfig = {
     StartCalendarInterval = [{ Hour = 3; Minute = 0; }];
