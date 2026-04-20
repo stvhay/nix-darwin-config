@@ -41,6 +41,7 @@ pkgs: with pkgs;
   gnumake
   macmon
   macpm
+  markdownlint-cli
   mas
   mdfried
   minicom

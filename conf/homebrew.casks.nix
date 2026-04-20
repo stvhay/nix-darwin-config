@@ -22,7 +22,6 @@
   "jellyfin-media-player"
   "karabiner-elements"
   "knockknock"
-  "logseq"
   "lulu"
   "maintenance"
   "mactex"
