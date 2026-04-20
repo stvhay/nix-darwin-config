@@ -41,6 +41,10 @@
         })
       ];
       environment = {
+        etc."gitconfig".text = ''
+          [safe]
+            directory = /etc/nix-darwin
+        '';
         etc."newsyslog.d/nixdarwin-upgrade.conf".text = ''
           # logfilename                          mode count size when  flags
           /var/log/nixdarwin-upgrade.log          644  3     512  *     J
