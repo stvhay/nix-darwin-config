@@ -17,7 +17,7 @@ pkgs: with pkgs;
 
     # Build and switch — needs root
     echo "nix rebuild and switch..."
-    if /run/current-system/sw/bin/darwin-versionarwin-rebuild switch --flake /etc/nix-darwin 2>&1; then
+    if /run/current-system/sw/bin/darwin-rebuild switch --flake /etc/nix-darwin 2>&1; then
       printf "\nSUCCESS: darwin-rebuild switch completed\n"
     else
       printf "\nFAILURE: darwin-rebuild switch exited %d\n" "$?"
