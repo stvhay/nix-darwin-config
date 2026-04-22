@@ -9,6 +9,7 @@ pkgs: with pkgs;
   bash
   bash-completion
   btop
+  chezmoi
   colordiff
   coreutils-prefixed
   curl
