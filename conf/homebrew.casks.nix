@@ -17,7 +17,6 @@
   "element"
   "ghostty"
   "gimp"
-  "handbrake-app"
   "hex-fiend"
   "jellyfin-media-player"
   "karabiner-elements"
