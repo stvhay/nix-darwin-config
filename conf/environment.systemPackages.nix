@@ -3,6 +3,7 @@ pkgs: with pkgs;
   age
   ansible
   aria2
+  ast-grep
   autossh
   arping
   awscli2
