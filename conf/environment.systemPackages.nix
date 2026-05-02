@@ -76,6 +76,7 @@ pkgs: with pkgs;
   socat
   sox
   stockfish
+  tinyxxd
   tmux
   tree
   uv
