@@ -31,6 +31,7 @@ pkgs: with pkgs;
   gh
   git
   gnugrep
+  gnumake
   gnused
   graphviz
   htop
@@ -40,7 +41,6 @@ pkgs: with pkgs;
   intermodal
   iperf
   jq
-  gnumake
   macmon
   macpm
   markdownlint-cli
