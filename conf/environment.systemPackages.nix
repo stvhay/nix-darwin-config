@@ -75,6 +75,7 @@ pkgs: with pkgs;
   smartmontools
   socat
   sox
+  speedtest-go
   stockfish
   tinyxxd
   tmux
