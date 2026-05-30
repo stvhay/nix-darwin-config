@@ -58,6 +58,7 @@ pkgs: with pkgs;
   nixfmt
   neovim-unwrapped
   nmap
+  nodejs
   opusTools
   openssh
   pass
