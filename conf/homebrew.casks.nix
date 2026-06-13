@@ -18,7 +18,6 @@
   "ghostty"
   "gimp"
   "hex-fiend"
-  "jellyfin-media-player"
   "karabiner-elements"
   "knockknock"
   "lulu"

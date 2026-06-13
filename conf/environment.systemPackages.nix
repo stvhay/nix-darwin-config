@@ -15,10 +15,7 @@ pkgs: with pkgs;
   coreutils-prefixed
   curl
   dnsutils
-  docker
-  docker-compose
   dos2unix
-  dosbox-x
   eza
   fd
   ffmpeg
