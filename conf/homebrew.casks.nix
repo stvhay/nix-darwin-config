@@ -11,6 +11,7 @@
   "calibre"
   "daisydisk"
   "discord"
+  "docker-desktop"
   "firefox@esr"
   "firefox@developer-edition"
   "freecad"

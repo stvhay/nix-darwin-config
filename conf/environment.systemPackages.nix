@@ -14,7 +14,6 @@ pkgs: with pkgs;
   colordiff
   coreutils-prefixed
   curl
-  docker_29
   dnsutils
   dos2unix
   eza
