@@ -56,6 +56,7 @@ pkgs: with pkgs;
   neovim-unwrapped
   nmap
   nodejs
+  ocrmypdf
   opusTools
   openssh
   pass
