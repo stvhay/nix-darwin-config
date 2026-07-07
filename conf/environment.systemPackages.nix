@@ -60,6 +60,7 @@ pkgs: with pkgs;
   openssh
   pass
   picocom
+  poppler-utils
   pstree
   pwgen
   python3
