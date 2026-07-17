@@ -9,6 +9,7 @@
   "busycontacts"
   "caffeine"
   "calibre"
+  "codex"
   "daisydisk"
   "discord"
   "docker-desktop"
