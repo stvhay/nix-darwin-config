@@ -3,5 +3,6 @@
   "container"
   "lilypond"
   "mole"
+  "mq"
   "ollama"
 ]
