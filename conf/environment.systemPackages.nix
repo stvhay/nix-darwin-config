@@ -16,7 +16,6 @@ pkgs: with pkgs;
   curl
   dnsutils
   dos2unix
-  eza
   fd
   ffmpeg
   findutils
@@ -55,7 +54,7 @@ pkgs: with pkgs;
   nixfmt
   neovim-unwrapped
   nmap
-  nodejs
+  nodejs_24
   ocrmypdf
   opusTools
   openssh
@@ -71,7 +70,6 @@ pkgs: with pkgs;
   rsync
   ruff
   screen
-  shellcheck
   smartmontools
   socat
   sox
