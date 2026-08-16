@@ -16,7 +16,6 @@
   "firefox@esr"
   "firefox@developer-edition"
   "freecad"
-  "element"
   "ghostty"
   "gimp"
   "hex-fiend"
