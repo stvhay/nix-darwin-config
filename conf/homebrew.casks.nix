@@ -22,6 +22,7 @@
   "karabiner-elements"
   "knockknock"
   "lulu"
+  "macpacker"
   "maintenance"
   "movist-pro"
   "rectangle"
