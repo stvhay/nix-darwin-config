@@ -62,6 +62,7 @@ pkgs: with pkgs;
   picocom
   poppler-utils
   pstree
+  pv
   pwgen
   python3
   rclone
