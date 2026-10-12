@@ -2,6 +2,7 @@
   "beads"
   "colima"
   "container"
+  "ghidra"
   "lilypond"
   "mole"
   "mq"
