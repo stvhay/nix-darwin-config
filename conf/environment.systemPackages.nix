@@ -56,7 +56,7 @@ pkgs: with pkgs;
   nmap
   nodejs_24
   ocrmypdf
-  opusTools
+  opus-tools
   openssh
   pass
   picocom
