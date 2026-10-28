@@ -79,6 +79,7 @@ pkgs: with pkgs;
   tinyxxd
   tmux
   tree
+  tree-sitter
   uv
   vim
   watch
