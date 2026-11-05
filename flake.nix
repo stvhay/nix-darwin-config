@@ -18,6 +18,9 @@
       nixpkgs.hostPlatform = "aarch64-darwin";
       nixpkgs.overlays = [
         (final: prev: {
+          ocrmypdf = prev.ocrmypdf.overridePythonAttrs (_: {
+            doCheck = false;
+          });
           ffmpeg = prev.ffmpeg.overrideAttrs (old: {
             postFixup = (old.postFixup or "") + ''
               for f in "$out"/lib/*.dylib; do
