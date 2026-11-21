@@ -6,6 +6,7 @@
   "balenaetcher"
   "blender"
   "blockblock"
+  "busycal"
   "busycontacts"
   "caffeine"
   "calibre"
